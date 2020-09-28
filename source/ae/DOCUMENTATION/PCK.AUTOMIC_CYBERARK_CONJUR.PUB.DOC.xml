@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
+<DOCU name="PCK.AUTOMIC_CYBERARK_CONJUR.PUB.DOC">
+<HEADER state="1">
+<Title>Package Documentation</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType/>
+</HEADER>
+<DOCU_Docu state="1" type="text">
+<DOC><![CDATA[About the Package
+================================
+CyberArk Conjur is an open source security service that integrates with popular tools to provide data encryption, identity management for humans and machines, and role-based access control for
+sensitive secrets like passwords, SSH keys, and API keys. Conjur stores sensitive credentials as Secrets and it controls access to them via strictly defined roles and access rights. It can be
+managed via open source CLI or REST API.
+
+=Supported versions=
+conjur-cli version 6.2.0
+conjur version 5
+
+=Setup=
+* Action supports Unix agent only.
+* Oracle JRE 1.7 must be installed on Agent OS and "java" must be set as executable on the same.
+* Conjur command-line tool should be installed on Agent OS and must be set in the environment.
+* The Agent should be able to access Conjur Service URL.
+
+=Variables=
+(none)
+
+=Common Input=
+-Conjur Url*: Provide URL of the Conjur service. E.g. conjur, http://eval.conjur.org/
+-Account*: Provide organization account name which contains variable. E.g. db/password
+-Username*: Provide the username for the conjur account. E.g. Admin
+-Password*: Provide the password for the conjur account.
+
+=Actions=
+Following actions are supported.
+
+* Action Name: PCK.AUTOMIC_CYBERARK_CONJUR.PUB.ACTION.RETRIEVE_SECRET
+* Action Description: This action fetches the value of a secret from Conjur
+]]></DOC>
+</DOCU_Docu>
+</DOCU>
+</uc-export>

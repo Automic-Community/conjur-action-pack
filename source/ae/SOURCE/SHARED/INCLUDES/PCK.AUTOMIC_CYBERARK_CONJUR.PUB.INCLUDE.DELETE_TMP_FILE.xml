@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
+<JOBI name="PCK.AUTOMIC_CYBERARK_CONJUR.PUB.INCLUDE.DELETE_TMP_FILE">
+<HEADER state="1">
+<Title>Delete Temporary file</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType/>
+</HEADER>
+<SCRIPT mode="1" state="1">
+<MSCRI><![CDATA[:  PUT_PROMPT_BUFFER AGENT# = &AGENT#
+:  PUT_PROMPT_BUFFER LOGIN# = &LOGIN#
+:  PUT_PROMPT_BUFFER  UC4RB_DIR_FILE_RM_FAIL# = "YES"
+:  PUT_PROMPT_BUFFER UC4RB_DIR_FILE_RM_NAME# = &TEMP_DIR#
+:  SET &UC4RB_FILE_OBJ# = "PCK.AUTOMIC_FILESYSTEM.PUB.ACTION.DELETE"
+:  P "Delete temporary file &TEMP_DIR# using &UC4RB_FILE_OBJ#"
+:  SET &ACTOBJ# = ACTIVATE_UC_OBJECT(&UC4RB_FILE_OBJ#,WAIT)
+:  IF &ACTOBJ# = "0"
+:    SET &ERRNR# = SYS_LAST_ERR_NR()
+:    SET &ERRINS#  = SYS_LAST_ERR_INS()
+:    SET &MESSAGE# = GET_MSG_TXT(&ERRNR#,&ERRINS#)
+:    PRINT "Error while activating &UC4RB_FILE_OBJ# object :&MESSAGE#"
+:  ELSE
+:    SET &STATUS# = GET_UC_OBJECT_STATUS(,&ACTOBJ#,"RETCODE")
+:    P "DELETING TEMP FILE &TEMP_DIR# STATUS: &STATUS#"
+:    IF &STATUS# <> "0"
+:      PRINT "Error while deleting &TEMP_DIR# file"
+:    ENDIF
+:  ENDIF]]></MSCRI>
+</SCRIPT>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</JOBI>
+</uc-export>
