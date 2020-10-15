@@ -2,102 +2,65 @@
 
 
 ###### Description
- This CyberArk Conjur action pack used to support the CyberArk Conjur feature on Automic Automation. [Check the Feature support by action pack](source/README.md)
+
+Conjur from CyberArk is an open source security service that integrates with popular tools to provide data encryption, identity management for humans and machines, and role-based access control for sensitive secrets like passwords, SSH keys, and API keys.
+With this Action Pack you can store in Conjur the credentials that Automic One Automation platform requires to execute actions in target systems. Credentials are Secrets in Conjur, they will be fetched at runtime during the execution of your Automic workflows.
+This way, you do not need to hardcode in Automic the credentials of the target systems, data is not duplicated and you can use the rotation feature of Conjur. Flexibility and security are increased.
+		
+###### Actions
+
+1. Retrieve Secret
+		
+###### Compatibility:
+
+1. CA APM V10.5
+2. Open JDK Java 11
+3. Oracle Java 1.7
 
 ###### Prerequisite:
-	1. AE (Automation Engine) is installed. 
-	2. On AE, Please Install ITPA_SHARED and File System package.
-	3. apm (Automic package Manager) also installed.
-		a. https://techdocs.broadcom.com/us/en/ca-enterprise-software/it-operations-management/application-performance-management/10-7.html
-	4) If package is java action pack then (check for java pack: package-dir/tools/pom.xml)
-		a. Java is installed. Reference to install java: https://www3.ntu.edu.sg/home/ehchua/programming/howto/JDK_Howto.html
-		b. Maven is installed. reference : https://maven.apache.org/install.html 
 
-###### Apm doctor:
-As a package manager user, what that the package manager is able to analyse and repair my environment in case that I get system exceptions, so that I don't need to contact the support if my AE client is messed up.
+1. Automation Engine should be installed.
+2. Automic Package Manager should be installed.
+3. ITPA Shared Action Pack should be installed. 
+4. PCK.AUTOMIC_FILESYSTEM Action Pack should be installed. 
+5. Action supports Unix agent only.
+6. Oracle JRE 1.7 or later
+7. Conjur command-line tool should be installed on Agent OS and must be set in the environment.
+8. The Agent should be able to access Conjur Service URL.
 
-There are two sub-commands:
-| Sub Command  | Description                                    | Command            |
-|--------------|------------------------------------------------|--------------------|
-| doctor check | analyze and show up current environment issues	| apm doctor check   |
-| doctor fix   | repair environment issues	                | apm doctor fix     |
 
-###### Steps to install the action package on AE:
-	1. Clone the code to your machine.
-	2. Go to the package directory.
-	3. Run maven command if uses java action pack: mvn clean package
-	4. Run the command: 
-	apm upload -force -u <Name>/<Department> -c <Client-id> -H <Host> -S AUTOMIC -y -ia -ru
-		- Name: Name use the user.
-		- Department: Name of the Department.
-		- Client-id: Provide the client id.
-		- Host: Host on which the AE is running.
+###### Steps to install action pack source code:
 
-###### Verifying the installation:
-	1. Login to AE machine
-	2. Click on Administration.
-	3. Click on packs in corner of left menu.
-	4. Check in the displayed list of actions.
+1. Clone the code to your machine.
+2. Go to the package directory.
+3. Run the command apm upload in the directory which contains package.yml (source/):
 
-###### Action Builder:
-In Action builder, Lets try to add new action in the existing action package and the delete process of action.
+Ex. **apm upload -force -u <Name>/<Department> -c <Client-id> -H <Host> -pw <Password> -S AUTOMIC -y -ia -ru**
 
-     > Add an action:
-		1. Login to AE.
-		2. Go to process assembly.
-		3. Click on packs on the left bottom corner.
-		4. Select the action package.
-		5. Or the right window clicks the add action button.
-		6. On the Add action tab:
-			a. Select the Action type. E.g. (CLI)
-			b. Title of the action. E.g. (Test)
-			c. Category: Directory in which action is store. E.g. package name\actions
-			d. Provide the name of the action. E.g. (Test)
-			e. Click next.
-			f. Verify the structure of the action and then click add button.
-			g. On the next window “Action created successfully” message appear, Click the close button.
-		7. New action will appear in the action list.
-    > Delete an action:
-		1. Login to AE.
-		2. Go to process assembly.
-		3. Click on packs on the left bottom corner.
-		4. Select the action package.
-		5. Select the action to be delete.
-		6. Right click on the action.
-		7. Click on delete.
+
+###### Package/Action Documentation
+
+Please refer to the link for [package documentation](source/ae/DOCUMENTATION/PCK.AUTOMIC_CYBERARK_CONJUR.PUB.DOC.xml)
+
+###### Third party licenses:
+
+The third-party library and license document reference.[Third party licenses](source/ae/DOCUMENTATION/PCK.AUTOMIC_CYBERARK_CONJUR.PUB.LICENSES.xml)
+
+###### Useful References
+
+1. [About Packs and Plug-ins](https://docs.automic.com/documentation/webhelp/english/AA/12.3/DOCU/12.3/Automic%20Automation%20Guides/help.htm#PluginManager/PM_AboutPacksandPlugins.htm?Highlight=Action%20packs)
+2. [Working with Packs and Plug-ins](https://docs.automic.com/documentation/webhelp/english/AA/12.3/DOCU/12.3/Automic%20Automation%20Guides/help.htm#PluginManager/PM_WorkingWith.htm#link10)
+3. [Actions and Action Packs](https://docs.automic.com/documentation/webhelp/english/AA/12.3/DOCU/12.3/Automic%20Automation%20Guides/help.htm#_Common/ReleaseHighlights/RH_Plugin_PackageManager.htm?Highlight=Action%20packs)
+4. [PACKS Compatibility Mode](https://docs.automic.com/documentation/webhelp/english/AA/12.3/DOCU/12.3/Automic%20Automation%20Guides/help.htm#AWA/Variables/UC_CLIENT_SETTINGS/UC_CLIENT_PACKS_COMPATIBILITY_MODE.htm?Highlight=Action%20packs)
+5. [Working with actions](https://docs.automic.com/documentation/webhelp/english/AA/12.3/DOCU/12.3/Automic%20Automation%20Guides/help.htm#ActionBuilder/AB_WorkingWith.htm#link4)
+6. [Installing and Configuring the Action Builder](https://docs.automic.com/documentation/webhelp/english/AA/12.3/DOCU/12.3/Automic%20Automation%20Guides/help.htm#ActionBuilder/install_configure_plugins_AB.htm?Highlight=Action%20packs)
 
 ###### Distribution: 
-In the distribution process, we can download the exiting or updated action package from the Automation Engine by using the below command Apm build and share the zip.
-**Command: apm build [option] <package_name>**
 
-Options:
-This command has the following option(s):
-
-|Name           |Shortkey|Required |    Arguments	        |                Description                                                                              |
-|---------------|--------|---------|----------------------------|---------------------------------------------------------------------------------------------------------|
-|--output-format|-o	 | No	   |[solution\|zip\|\tar\|folder] <br>Default: folder|Defines the output format of the package. The possible options are:<br>SOLUTION: Zip-archive with the extension ".solution"<br>ZIP: Zip-archive with the extension ".zip"<br>TAR: gzip-compressed tar-archive with the extension ".tar.gz"<br>FOLDER: Folder in the specified target directory
-|--target-dir	|-d	 | No	   |N/A <br>Default:  <current_dir>                    | Path to target directory in local filesystem E.g. /packages/|
-|--client	|-c	 | No	   |NA	                        |Automation Engine client number. E.g.106   |
-|--host	        |-H	 | No	   |NA	                        |Automation Engine hostname or IP address. E.g.  10.149.132.64         |
-|--password	|-pw	 | No	   |NA	                        |Automation Engine password. E.g. password |
-|--user	        |-u	 | No	   |NA 	                        |Automation Engine user/department, E.g.: John/Unit1                       |
-|--port	        |-p      | No	   |NA	                        |Automation Engine port. E.g. 8080    | 
-|--system	|-S	 | No	   |NA	                        |Selected system                      |
-
-**Example: 
-apm build -y -H vvieintegr0201.sbb01.spoc.global -c 106 -u TEST/TEST -pw *** -d /directory/ -o zip -v action_pack_name
-Output: 
-Pack action_pack_name was built successfully at /directory/action_pack_name_version.zip**
-
-
-###### Do or Don’t:
-	> Do
-		1. Add action.
-		2. Delete action.
-	> Don’t
-		1. Do not change the vara and include name. It will affect the almost all actions of the action pack.
-		2. Do not raise a pull request for delete action.
-		
-		
+In the distribution process, we can download the existing or updated action package from the Automation Engine by using the apm build command.
+Example: **apm build -y -H AE_HOST -c 106 -u TEST/TEST -pw password -d /directory/ -o zip -v action_pack_name**
+			
+			
 ###### Copyright and License: 
-Broadcom does not support, maintain or warrant Solutions, Templates, Actions and any other content published on the Community and is subject to Broadcom Community Terms and Conditions (https://community.broadcom.com/termsandconditions).
+
+Broadcom does not support, maintain or warrant Solutions, Templates, Actions and any other content published on the Community and is subject to Broadcom Community [Terms and Conditions](https://community.broadcom.com/termsandconditions)
